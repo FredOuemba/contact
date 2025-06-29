@@ -21,11 +21,11 @@ function getInitials(name) {
   return (parts[0][0] + (parts[1]?.[0] || "")).toUpperCase();
 }
 
-/** Fetch and render contacts (Placeholder: add your own data source here) */
+/** Fetch and render contacts */
 async function fetchData() {
-  // TODO: Replace with your own data source (localStorage, REST, etc.)
-  // Example: allContacts = JSON.parse(localStorage.getItem("contacts") || "[]");
-  allContacts = []; // Placeholder: set your own contacts here
+  let res = await fetch("https://join-2aee1-default-rtdb.europe-west1.firebasedatabase.app/.json");
+  let data = await res.json();
+  allContacts = Object.values(data.person || {});
   renderContacts();
   document.getElementById('new-contact').classList.remove('d_none');
 }
@@ -92,24 +92,21 @@ function showContact(name) {
 /** Add new contact overlay */
 function addContact() {
   clearOverlay();
-  let modalBackdrop = document.getElementById("modalBackdrop");
-  modalBackdrop.classList.remove("slidein-active");
   openModal("modalBackdrop");
   document.getElementById("addContactForm").innerHTML = contactAddFormTemplate();
 }
 
-/** Show edit overlay (Figma style: slide-in from left) */
+/** Show edit overlay: Figma style, from left */
 function editContact(name) {
   let contact = allContacts.find(c => c.name === name);
   clearOverlay();
-  const modalBackdrop = document.getElementById("modalBackdrop");
-  modalBackdrop.classList.add("slidein-active");
   openModal("modalBackdrop");
+  // Figma-like Slide-in Overlay von LINKS
   document.getElementById("addContactForm").innerHTML = `
     <div class="edit-contact-overlay-slidein">
       <div class="edit-contact-header">
         <img src="assets/sidebarLogo.png" alt="Join Logo">
-        <span>Edit contact</span>
+        Edit contact
         <button class="edit-contact-close" onclick="closeOverlay()">&times;</button>
       </div>
       <div class="edit-contact-content">
@@ -142,18 +139,21 @@ function editContact(name) {
 /** Handle form submit (add/edit) */
 function handleContactFormSubmit(event) {
   event.preventDefault();
-  // TODO: Add your own save/update logic here
+  // Hier kannst du Save/Update-Logik ergänzen
   closeOverlay();
 }
 
-/** Delete contact (Placeholder: add your own delete logic) */
-function deleteContact(name) {
-  // TODO: Implement deletion logic (array update, localStorage, etc.)
-  // Example:
-  // allContacts = allContacts.filter(c => c.name !== name);
-  // localStorage.setItem("contacts", JSON.stringify(allContacts));
+/** Delete contact */
+async function deleteContact(name) {
+  let res = await fetch("https://join-2aee1-default-rtdb.europe-west1.firebasedatabase.app/person.json");
+  let data = await res.json();
+  let [key] = Object.entries(data || {}).find(([_, val]) => val.name === name) || [];
+  if (!key) return;
+  await fetch(`https://join-2aee1-default-rtdb.europe-west1.firebasedatabase.app/person/${key}.json`, {
+    method: "DELETE"
+  });
   closeContactOverlay();
-  renderContacts();
+  fetchData();
   closeOverlay();
 }
 
@@ -162,7 +162,6 @@ function closeOverlay(event) {
   if (event && event.target.id !== "modalBackdrop") return;
   clearOverlay();
   closeModal("modalBackdrop");
-  document.getElementById("modalBackdrop").classList.remove("slidein-active");
 }
 
 /** Clear overlays */
@@ -330,5 +329,4 @@ function contactAddFormTemplate() {
 function closeOverlayDirectly() {
   clearOverlay();
   closeModal("modalBackdrop");
-  document.getElementById("modalBackdrop").classList.remove("slidein-active");
 }
