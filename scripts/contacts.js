@@ -1,3 +1,5 @@
+// contacts.js – Figma-Style Edit Contact Overlay & modernes Modul
+
 let allContacts = [];
 let avatarColors = [
   "#FF7A00", "#FF5C01", "#FFBB2E", "#0095FF", "#6E52FF", "#9327FF",
@@ -96,7 +98,7 @@ function addContact() {
   document.getElementById("addContactForm").innerHTML = contactAddFormTemplate();
 }
 
-/** Show edit overlay: Figma style, from left */
+/** Show edit overlay (Figma style, Drawer/Slideover) */
 function editContact(name) {
   let contact = allContacts.find(c => c.name === name);
   clearOverlay();
@@ -107,8 +109,69 @@ function editContact(name) {
 /** Handle form submit (add/edit) */
 function handleContactFormSubmit(event) {
   event.preventDefault();
-  // Hier kannst du Save/Update-Logik ergänzen
+  if (validateContactForm()) {
+    // Erkenn ob es ein neues oder ein bestehendes Kontaktformular ist
+    let btn = document.getElementById("createContactBtn");
+    if (btn) {
+      // Neuer Kontakt
+      saveContact();
+    } else {
+      // Bestehender Kontakt wird editiert
+      let contactName = document.querySelector('.add-contact-overlay .edit-contact-avatar, .edit-contact-avatar');
+      let oldName = contactName ? contactName.textContent : "";
+      updateContact(oldName);
+    }
+  }
+}
+
+/** Save new contact */
+async function saveContact() {
+  const submitBtn = document.getElementById("createContactBtn");
+  if (!validateContactForm()) return;
+  disableSubmitButton(submitBtn);
+
+  const contactData = {
+    name: document.getElementById("inputName").value.trim(),
+    email: document.getElementById("inputEmail").value.trim(),
+    phone: document.getElementById("inputPhone").value.trim()
+  };
+
+  try {
+    await fetch("https://join-2aee1-default-rtdb.europe-west1.firebasedatabase.app/person.json", {
+      method: "POST",
+      body: JSON.stringify(contactData),
+      headers: { "Content-Type": "application/json" }
+    });
+    await fetchData();
+    closeOverlay();
+    showSuccessMessage();
+  } catch (error) {
+    handleContactError(error);
+  } finally {
+    enableSubmitButton(submitBtn);
+  }
+}
+
+/** Update existing contact (by oldName) */
+async function updateContact(oldName) {
+  const name = document.getElementById("inputName").value.trim();
+  const email = document.getElementById("inputEmail").value.trim();
+  const phone = document.getElementById("inputPhone").value.trim();
+
+  let res = await fetch("https://join-2aee1-default-rtdb.europe-west1.firebasedatabase.app/person.json");
+  let data = await res.json();
+  let entry = Object.entries(data || {}).find(([_, val]) => val.name === oldName);
+  if (!entry) return;
+  let [key] = entry;
+
+  await fetch(`https://join-2aee1-default-rtdb.europe-west1.firebasedatabase.app/person/${key}.json`, {
+    method: "PUT",
+    body: JSON.stringify({ name, email, phone }),
+    headers: { "Content-Type": "application/json" }
+  });
+  await fetchData();
   closeOverlay();
+  showSuccessMessage("Contact updated successfully");
 }
 
 /** Delete contact */
@@ -132,10 +195,18 @@ function closeOverlay(event) {
   closeModal("modalBackdrop");
 }
 
+/** Close overlay directly (for close btn) */
+function closeOverlayDirectly() {
+  clearOverlay();
+  closeModal("modalBackdrop");
+}
+
 /** Clear overlays */
 function clearOverlay() {
-  document.getElementById("addContactForm").innerHTML = "";
-  document.getElementById("overlay").innerHTML = "";
+  let form = document.getElementById("addContactForm");
+  if (form) form.innerHTML = "";
+  let overlay = document.getElementById("overlay");
+  if (overlay) overlay.innerHTML = "";
 }
 
 /** Open modal for overlay */
@@ -159,38 +230,59 @@ function toggleShowContactMobile(name) {
   openModal("modalBackdrop");
 }
 
-/** ===================== Overlay Template: Figma-Style ===================== */
-function contactEditFormTemplate(contact) {
-  return `
-    <div class="edit-contact-overlay-slidein">
-      <div class="edit-contact-header">
-        <img src="assets/sidebarLogo.png" alt="Join Logo">
-        Edit contact
-        <button class="edit-contact-close" onclick="closeOverlay()">&times;</button>
-      </div>
-      <div class="edit-contact-content">
-        <div class="edit-contact-avatar" style="background: ${getColorForName(contact.name)};">
-          ${getInitials(contact.name)}
-        </div>
-        <form class="edit-contact-form" id="contactForm" onsubmit="handleContactFormSubmit(event)">
-          <div class="input-wrapper">
-            <input id="inputName" value="${contact.name || ''}" required autocomplete="off" placeholder="Name">
-            <img class="input-icon" src="assets/person.png" alt="Name">
-          </div>
-          <div class="input-wrapper">
-            <input id="inputEmail" type="email" value="${contact.email || ''}" required autocomplete="off" placeholder="E-Mail">
-            <img class="input-icon" src="assets/mail.png" alt="E-Mail">
-          </div>
-          <div class="input-wrapper">
-            <input id="inputPhone" value="${contact.phone || ''}" required autocomplete="off" placeholder="Phone">
-            <img class="input-icon" src="assets/call.png" alt="Phone">
-          </div>
-          <div class="edit-contact-buttons">
-            <button type="button" class="delete-btn" onclick="deleteContact('${contact.name}')">Delete</button>
-            <button type="submit" class="save-btn">Save <span>&#10003;</span></button>
-          </div>
-        </form>
-      </div>
-    </div>
-  `;
+/* ===== UI HELPERS ===== */
+
+/** Zeigt erfolgreich-Toast */
+function showSuccessMessage(msg="Contact successfully created") {
+  let el = document.getElementById("successMessage");
+  if (!el) return;
+  el.textContent = msg;
+  el.style.display = "block";
+  setTimeout(() => {
+    el.style.display = "none";
+  }, 1800);
+}
+
+/** Button states */
+function disableSubmitButton(btn) {
+  if (btn) {
+    btn.disabled = true;
+    btn.innerHTML = `Saving...`;
+  }
+}
+function enableSubmitButton(btn) {
+  if (btn) {
+    btn.disabled = false;
+    btn.innerHTML = `Create contact <span>&check;</span>`;
+  }
+}
+
+function handleContactError(error) {
+  alert("There was an error saving the contact. Try again.");
+  console.error("Error:", error);
+}
+
+/* ====== Templates müssen eingebunden sein! ====== */
+/* contactGroupTemplate, contactCardTemplate, contactDetailTemplate, contactAddFormTemplate, contactEditFormTemplate */
+/* z.B. in contactTemplate.js oder hier importieren */
+
+/* ====== Validation ====== */
+/* Stelle sicher, dass validateContactForm in contact-form.js vorhanden ist */
+
+/* ====== Exportiere für Tests (optional) ====== */
+if (typeof module !== "undefined") {
+  module.exports = {
+    getColorForName,
+    getInitials,
+    groupByLetter,
+    fetchData,
+    renderContacts,
+    showContact,
+    addContact,
+    editContact,
+    handleContactFormSubmit,
+    saveContact,
+    updateContact,
+    deleteContact
+  };
 }
