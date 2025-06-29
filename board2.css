@@ -1,0 +1,283 @@
+
+.task-card-title {
+    font-size: 44px;
+    font-weight: bold;
+    margin-bottom: 0;
+    line-height: 1.3;
+  }
+  
+  .task-card-description {
+    font-size: 18px;
+  }
+  
+  .task-card-info {
+    font-size: 18px;
+  }
+  
+  .task-card-priority {
+    display: flex;
+    align-items: center;
+  }
+  
+  .task-card-priority span {
+    margin-left: 6px;
+    color: orange;
+  }
+  
+  .task-card-assigned {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 4px;
+  }
+  
+  .task-card-person {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .task-card-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+  }
+  
+  .task-card-name {
+    font-size: 16px;
+  }
+  
+  .task-card-subtasks {
+    margin-top: 8px;
+  }
+  
+  .task-card-subtasks label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+  }
+  
+  .task-card-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 12px;
+  }
+  
+  .task-card-actions button {
+    padding: 6px 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .task-card-delete-btn {
+  background-color: white;
+   gap: 10px;
+  }
+  
+  .task-card-edit-btn {
+    background-color: white;
+  }
+  
+  
+  .task-card-edit-save-btn {
+    background-color: #2a3646;
+    color: white;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+  }
+  
+  .task-card-edit-save-btn:hover {
+    background-color: #29abe2;;
+  }
+  
+  .hover-blue {
+    display: flex;
+    align-items: center;
+    gap: 6px; /* Optional, für sauberen Abstand */
+    color: inherit; /* Startfarbe vom Text */
+    transition: color 0.2s ease;
+  }
+  
+  .hover-blue img {
+    filter: none;
+    transition: filter 0.2s ease;
+  }
+  
+  .hover-blue:hover {
+    color: #29abe2; /* Dein Wunschblau */
+  }
+  
+  .hover-blue:hover img {
+    filter: brightness(0) saturate(100%) invert(46%) sepia(76%) saturate(442%) hue-rotate(162deg) brightness(91%) contrast(94%);
+    font-weight: bolder;
+  }
+  
+  
+  .subtask-input-wrapper {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 4px 8px;
+    margin-bottom: 10px;
+    background-color: white;
+  }
+  
+  .subtask-input {
+    border: none;
+    outline: none;
+    flex-grow: 1;
+    font-size: 16px;
+    color: #333;
+    padding: 6px;
+  }
+  
+  .subtask-input::placeholder {
+    color: #ccc;
+  }
+  
+  .subtask-add-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: #1a1a1a;
+    cursor: pointer;
+    padding: 0 6px;
+    transition: color 0.2s;
+  }
+  
+  .subtask-add-btn:hover {
+    color: #007bff;
+  }
+  
+  
+  .round-plus-btn {
+    display: none !important;  
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background-color: #2e3a59;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+   margin-top: 24px;
+  }
+  
+  .round-plus-btn:hover {
+    background-color: #1e293b;
+    cursor: pointer;
+  }
+  
+  .header-and-Button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .subtask-label {
+    margin-top: 6px;
+    display: inline-flex;
+    align-items: baseline;   /* Text und Checkbox an Baseline ausrichten */
+    gap: 8px;                /* Abstand zwischen Checkbox und Text */
+    cursor: pointer;
+  }
+  
+  .subtask-label input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;  /* Optional: leichte vertikale Korrektur */
+  }
+  
+  .avatar-counter {
+    background-color: #ffffff;  /* Optional: neutraler Hintergrund */
+    color: #000000;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .move-overlay button.disabled-button {
+    color: #666;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  
+  
+  .move-overlay {
+    position: absolute;
+    top: 12px; /* Direkt unter dem Icon */
+    bottom: 10px;
+    height: 110px;
+    right: 10px;
+    background: #2d3e50;
+    color: white;
+    padding: 10px;
+    border-radius: 12px 0px 12px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    z-index: 999;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+  
+  .dropzone.highlight {
+    background-color: #003f6d; /* Beispiel: hellblau */
+    border: 2px dashed #007bff; /* Optional: gestrichelter Rand */
+  }
+  
+  .move-overlay button {
+    background: none;
+    border: none;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 6px;
+    text-align: left;
+    cursor: pointer;
+  }
+  
+  .move-overlay button:hover {
+    background: #0d1b2a;
+  }
+  
+  .ghost-card {
+    border: 2px dashed #aaa;
+    height: 100px;
+    width: 100%;
+    border-radius: 12px;
+    margin: 8px 0;
+    background-color: transparent;
+    pointer-events: none;
+    box-sizing: border-box;
+  }
+  
+  
+  .responsive-swap {
+    position: relative; /* Wichtig: Referenz für .move-overlay */
+  
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .responsive-swap img {
+    height: 24px;
+    border: 1px solid black;
+    border-radius: 8px;
+    display: none;
+  }
+  

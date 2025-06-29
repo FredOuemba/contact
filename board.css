@@ -1,0 +1,882 @@
+/* Grundlayout */
+body {
+  display: flex;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+}
+
+/* Header */
+header h2 {
+  font-weight: 100;
+}
+
+.header-profile {
+  width: 100px;
+  display: flex;
+  justify-content: space-around;
+}
+
+/* Boardbereich */
+.board-section {
+  background-color: rgb(246, 247, 248);
+  height: calc(100vh - 90px);
+  width: calc(100vw - 250px);
+  
+}
+
+h1 {
+  font-size: 61px;
+  margin-bottom: 70px;
+  margin-top: 60px;
+}
+
+.Board-head {
+  display: flex;
+  /* justify-content: space-around; */
+  gap: 400px;
+  margin-left: 100px;
+}
+
+.add-find-task {
+  display: flex;
+  align-items: center;
+}
+
+/* Hauptbereich */
+main {
+  flex-grow: 1;
+  background-color: #f4f6f8;
+  margin-top: 90px;
+  padding-top: 0 !important;
+  display: flex;
+  justify-content: start;
+}
+
+/* Suchleiste */
+.search-container {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 4px 8px;
+  background-color: #f8f9fb;
+  width: 250px;
+  height: 36px;
+}
+
+.search-container input {
+  border: none;
+  outline: none;
+  flex: 1;
+  background-color: transparent;
+  font-size: 14px;
+  color: #555;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.search-container input::placeholder {
+  color: #ccc;
+}
+
+.search-icon {
+  margin-left: 8px;
+  color: #2d3a4a;
+  font-size: 16px;
+  border-left: 1px solid #ddd;
+  padding-left: 10px;
+}
+
+.search-icon img:hover {
+  cursor: pointer;
+  background-color: #d0d0d0;
+  border-radius: 32px;
+}
+
+.search-icon img {
+  padding: 2px;
+}
+
+/* Add Task Button */
+.add-task-btn {
+  background-color: #2d3a4a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-left: 12px;
+}
+
+.add-task-btn:hover {
+  background-color: rgb(13, 153, 255);
+}
+
+.plus-icon {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* Task-Spalten */
+.to-do-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 24px;
+  align-items: center;
+}
+
+.icon-btn {
+  width: 32px;
+  height: 32px;
+  border: 2px solid #2d3a4a;
+  border-radius: 8px;
+  background-color: transparent;
+  color: #2d3a4a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.icon-btn:hover {
+  color: rgb(13, 153, 255);
+  border-color: rgb(13, 153, 255);
+}
+
+.icon-btn:active {
+  transform: scale(0.95);
+}
+
+.progress-section {
+  width: 220px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  height: 60vh;    /* optional: schöner Look */
+}
+
+
+.board-cards {
+  display: flex;
+
+  gap: 6px;        
+  align-items: stretch;  
+}
+
+/* Karten */
+.no-tasks {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  background-color: rgb(231, 231, 231);
+  height: 54px;
+  border-radius: 12px;
+  color: #bcbcbc;
+  border: 2px dashed #bcbcbc;
+  align-items: center;
+}
+
+.card {
+  width: 200px;
+  background: white;
+  border-radius: 20px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.card-type {
+  background-color: #005dff;
+  color: white;
+  font-size: 16px;
+  padding: 4px 12px;
+  border-radius: 8px;
+  width: fit-content;
+  margin-bottom: 12px;
+}
+
+.card-title {
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+.card-description {
+  font-size: 16px;
+  color: #6b6b6b;
+  margin-bottom: 16px;
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.progress {
+  background-color: #eee;
+  height: 6px;
+  width: 100px;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 50%;
+  background-color: #4589ff;
+}
+
+.subtasks {
+  font-size: 14px;
+  color: #6b6b6b;
+}
+
+.card-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.avatars {
+  display: flex;
+  flex-wrap: wrap;         /* Avatare umbrechen, wenn kein Platz */
+  gap: 2px;                /* Abstand zwischen Avataren */
+  max-width: 100%;         /* Verhindert Überlauf */
+}
+
+.avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  color: white;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.menu-icon {
+  font-size: 18px;
+  color: #ffbb2b;
+  cursor: pointer;
+}
+
+/* ---------- Modal für Add Task ---------- */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 6000;
+}
+
+.modal-content {
+  background-color: white;
+  width: 80%;
+  height: 750px;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  max-width:1000px;
+
+}
+
+.modal-content iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.close-btn {
+  position: absolute;
+  margin-top: 20px;
+  margin-right: 20px ;
+  right: 10px;
+  font-size: 26px;
+  font-weight: bold;
+  color: #444;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.close-btn:hover {
+  color: #000;
+}
+
+/* Optional: Scrollsperre, wenn Modal aktiv */
+body.modal-open {
+  overflow: hidden;
+}
+
+
+/* Overlay */
+
+#overlay-container {
+  position: fixed;
+  inset: 0;
+  display: none; /* << default: hidden */
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 6000;
+}
+
+.nav-button {
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  user-select: none;
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+
+.task-card-overlay {
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  width: 360px;
+  padding: 24px;
+  max-height: 80vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  overflow-y: auto;
+
+}
+
+.task-card-overlay.animate-in {
+  animation: slideInFromRight 0.3s ease-out;
+}
+
+.task-card-label {
+  background-color: #1a73e8;
+  color: white;
+  font-size: 18px;
+  padding: 4px 12px;
+  border-radius: 12px;
+  width: fit-content;
+  text-align: center;
+}
+
+.task-card-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.task-card-title {
+  font-size: 44px;
+  font-weight: bold;
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.task-card-description {
+  font-size: 18px;
+}
+
+.task-card-info {
+  font-size: 18px;
+}
+
+.task-card-priority {
+  display: flex;
+  align-items: center;
+}
+
+.task-card-priority span {
+  margin-left: 6px;
+  color: orange;
+}
+
+.task-card-assigned {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.task-card-person {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.task-card-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+}
+
+.task-card-name {
+  font-size: 16px;
+}
+
+.task-card-subtasks {
+  margin-top: 8px;
+}
+
+.task-card-subtasks label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.task-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.task-card-actions button {
+  padding: 6px 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.task-card-delete-btn {
+background-color: white;
+ gap: 10px;
+}
+
+.task-card-edit-btn {
+  background-color: white;
+}
+
+
+.task-card-edit-save-btn {
+  background-color: #2a3646;
+  color: white;
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+}
+
+.task-card-edit-save-btn:hover {
+  background-color: #29abe2;;
+}
+
+.hover-blue {
+  display: flex;
+  align-items: center;
+  gap: 6px; /* Optional, für sauberen Abstand */
+  color: inherit; /* Startfarbe vom Text */
+  transition: color 0.2s ease;
+}
+
+.hover-blue img {
+  filter: none;
+  transition: filter 0.2s ease;
+}
+
+.hover-blue:hover {
+  color: #29abe2; /* Dein Wunschblau */
+}
+
+.hover-blue:hover img {
+  filter: brightness(0) saturate(100%) invert(46%) sepia(76%) saturate(442%) hue-rotate(162deg) brightness(91%) contrast(94%);
+  font-weight: bolder;
+}
+
+
+.subtask-input-wrapper {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 4px 8px;
+  margin-bottom: 10px;
+  background-color: white;
+}
+
+.subtask-input {
+  border: none;
+  outline: none;
+  flex-grow: 1;
+  font-size: 16px;
+  color: #333;
+  padding: 6px;
+}
+
+.subtask-input::placeholder {
+  color: #ccc;
+}
+
+.subtask-add-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #1a1a1a;
+  cursor: pointer;
+  padding: 0 6px;
+  transition: color 0.2s;
+}
+
+.subtask-add-btn:hover {
+  color: #007bff;
+}
+
+
+.round-plus-btn {
+  display: none !important;  
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background-color: #2e3a59;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+ margin-top: 24px;
+}
+
+.round-plus-btn:hover {
+  background-color: #1e293b;
+  cursor: pointer;
+}
+
+.header-and-Button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.subtask-label {
+  margin-top: 6px;
+  display: inline-flex;
+  align-items: baseline;   /* Text und Checkbox an Baseline ausrichten */
+  gap: 8px;                /* Abstand zwischen Checkbox und Text */
+  cursor: pointer;
+}
+
+.subtask-label input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;  /* Optional: leichte vertikale Korrektur */
+}
+
+.avatar-counter {
+  background-color: #ffffff;  /* Optional: neutraler Hintergrund */
+  color: #000000;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.move-overlay button.disabled-button {
+  color: #666;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+
+.move-overlay {
+  position: absolute;
+  top: 12px; /* Direkt unter dem Icon */
+  bottom: 10px;
+  height: 110px;
+  right: 10px;
+  background: #2d3e50;
+  color: white;
+  padding: 10px;
+  border-radius: 12px 0px 12px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 999;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.dropzone.highlight {
+  background-color: #003f6d; /* Beispiel: hellblau */
+  border: 2px dashed #007bff; /* Optional: gestrichelter Rand */
+}
+
+.move-overlay button {
+  background: none;
+  border: none;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.move-overlay button:hover {
+  background: #0d1b2a;
+}
+
+.ghost-card {
+  border: 2px dashed #aaa;
+  height: 100px;
+  width: 100%;
+  border-radius: 12px;
+  margin: 8px 0;
+  background-color: transparent;
+  pointer-events: none;
+  box-sizing: border-box;
+}
+
+
+.responsive-swap {
+  position: relative; /* Wichtig: Referenz für .move-overlay */
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.responsive-swap img {
+  height: 24px;
+  border: 1px solid black;
+  border-radius: 8px;
+  display: none;
+}
+
+@media (max-width:1320px) {
+  .Board-head {
+    gap: 100px;
+  }
+
+  .progress-section {
+    padding: 6px;
+  }
+
+}
+
+@media (max-width:1200px) {
+
+  .card {
+    width: 180px;
+  }
+
+}
+
+
+@media (max-width: 1145px) {
+  .Board-head {
+    flex-direction: column;
+    margin-left: 0;
+  }
+
+  .responsive-swap img {
+    display: block;
+  }
+
+  h1  {
+    margin-bottom: 0;
+    margin-top: 0 !important;
+  }
+.round-plus-btn {
+  margin-top: 0%;
+}
+
+  .header-and-Button {
+    justify-content: space-between;
+    margin: 12px;
+  }
+
+  .round-plus-btn {
+    display: block !important;
+  }
+
+  .add-task-btn {
+    display: none;
+  }
+
+  .add-find-task {
+    margin: 12px;
+
+  }
+
+  .search-container {
+    width: 100%;
+  }
+
+  .board-cards {
+    flex-direction: column;
+    gap: 12px;
+   
+  }
+
+  .card-bucket {
+    display: flex;
+    overflow-x: auto;
+    min-height: 200px;
+    width: 71vw;
+    gap: 12px;
+    padding-bottom: 8px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;        /* Firefox */
+    -ms-overflow-style: none;     /* IE 10+ */
+  }
+h1 {
+  border-bottom: 0 !important;
+}
+
+  .board-cards {
+    height: auto;
+    width: 100%;
+  }
+
+
+  .card {
+    min-width: 220px;
+    scroll-snap-align: start;
+    flex-shrink: 0;
+  }
+
+  .progress-section {
+    height: auto;
+  }
+}
+
+
+@media (max-width:894px) {
+
+  .card-bucket {
+    width: 65vw;
+
+  }
+
+  .board-section {
+
+    width: calc(100vw - 245px);
+}
+}
+
+@media (max-width:768px) {
+  .board-section {
+    margin-left: 0px;
+    width: 100vw;
+  }
+
+  .card-bucket {
+    display: flex;
+    overflow-x: auto;
+    min-height: 200px;
+    width: 91vw !important;
+    gap: 12px;
+    padding-bottom: 8px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;        /* Firefox */
+    -ms-overflow-style: none;     /* IE 10+ */
+  }
+
+  .board-cards {
+    height: auto;
+
+  }
+
+ 
+  .card-bucket::-webkit-scrollbar {
+    display: none;                /* Chrome, Safari */
+  }
+  
+  /* 🆕 Optional: Card Snap-Style fürs bessere Scroll-Erlebnis */
+  .card {
+    min-width: 220px;
+    scroll-snap-align: start;
+    flex-shrink: 0;
+  }
+
+  body {
+    margin-bottom: 700px;
+    justify-content: space-around;
+  }
+
+  .add-find-task {
+    margin: 12px;
+
+  }
+
+
+
+  .progress-section {
+    width: auto;
+    height: auto;
+  }
+}
+
+
+@media (max-height:894px) {
+
+  .task-card-overlay {
+    gap: 10px;
+
+  }
+
+}
+
+@media (max-height:700px) {
+
+  .task-card-overlay {
+    gap: 5px;
+
+  }
+
+
+
+  .board-cards {
+    height: auto;
+    padding-bottom: 100px;
+}
+}
+
+@media (min-width: 1145px) and (max-width: 1159px) {
+  .board-cards {
+    gap: 0;
+  }
+}
+
+@media (min-width: 894px) and (max-width: 896px) {
+  .card-bucket {
+    width:71vw !important;
+  }
+}
