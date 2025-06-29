@@ -1,0 +1,46 @@
+body {
+    margin:0;
+    background-color: #F6F7F8;
+    height: 100vh;
+}
+
+.header-icons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+button {
+    cursor:pointer;
+}
+
+a {
+    cursor:pointer;
+    text-decoration: none
+}
+
+.logo {
+width:100px;
+margin-top:20px;
+margin-left:20px;
+}
+
+.form-layout {
+    margin-top:20px;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+input[type="checkbox"] {
+    width: 20px;
+    height: 15px;
+    accent-color: #0b140b;
+    cursor: pointer;
+  }
+
+  .d-none {
+    display: none !important;
+  }
