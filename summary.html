@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Join Dashboard</title>
+  <link rel="stylesheet" href="style/sidebar.css" />
+  <link rel="stylesheet" href="style/summary.css" />
+  <link rel="stylesheet" href="style/help.css">
+  <link rel="stylesheet" href="style/boss.css">
+  <link rel="stylesheet" href="style/dropdown-menu.css">
+  <link rel="stylesheet" href="style/header.css">
+  <link rel="stylesheet" href="style/summaryResponsive.css">
+  <link rel="icon" type="image/x-icon" href="svg/Capa 2.svg">
+  <script src="JavaScript/summary.js"></script>
+  
+</head>
+<body onload="sumOfTask()">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <img src="svg/sidebarLogo.svg" alt="Join Logo">
+    </div>
+  
+    <nav class="sidebar-nav">
+      <a href="summary.html" class="nav-item active">
+        <div class="nav-item-content">
+          <img src="./svg/Icons.svg" alt="">
+          <span>Summary</span>
+        </div>
+      </a>
+  
+      <a href="addTask.html" class="nav-item">
+        <div class="nav-item-content">
+          <img src="./svg/Icons (1).svg" alt="">
+          <span>Add Task</span>
+        </div>
+      </a>
+  
+      <a href="boardsection.html" class="nav-item">
+        <div class="nav-item-content">
+          <img src="./svg/Vector (1) 2.svg" alt="">
+          <span>Board</span>
+        </div>
+      </a>
+  
+      <a href="contacts.html" class="nav-item">
+        <div class="nav-item-content">
+          <img src="./svg/Icons (3).svg" alt="">
+          <span>Contacts</span>
+        </div>
+      </a>
+    </nav>
+  
+    <div class="sidebar-footer">
+      <a href="privacyPolicy.html">Privacy Policy</a>
+      <a href="Legal-notice.html"> Legal notice</a>
+    </div>
+  </aside>
+  
+
+  <header class="page-header">
+    <div class="header-content">
+      <div class="logo-title">Kanban Project Management Tool</div>
+    <img class="header-logo" src="./svg/Capa 2.svg" alt="">
+    <div class="header-icons">
+      <div class="help-icon" id="helpIcon">?</div>
+      <div class="profile-wrapper">
+        <div class="user-initial-small" id="userInitialButton"></div>
+        
+        <div class="dropdown-menu-small" id="userDropdown">
+            <ul>
+                <li class="mobile-only"><a href="help.html">Help</a></li>
+                <li><a href="Legal-notice.html">Legal Notice</a></li>
+                <li><a href="privacyPolicy.html">Privacy Policy</a></li>
+                <li><a href="Index.html">Log out</a></li>
+            </ul>
+        </div>
+    </div>
+    </div>
+    
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+    <div class="headline">
+      <h1 class="title">Join 360</h1>
+      <div class="divider"></div>
+      <p class="sub">Key Metrics at a Glance</p>
+      <div class="divider-mobile"></div>
+    </div>
+    <div class="main-container">
+<div class="button-container">
+    <div class="card-container">
+      <a href="boardsection.html">
+        <div class="card">
+          <div class="card-icon">
+            <!-- Beispiel-SVG-Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="svg-icon">
+              <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 
+              0-1.41l-2.34-2.34a1.003 1.003 0 00-1.42 0l-1.83 1.83 3.75 3.75 1.84-1.83z" fill="currentColor"/>
+            </svg>
+          </div>
+          <div class="card-content">
+            <span id="todo"class="card-number">?</span>
+            <p class="card-label">To-do</p>
+          </div>
+        </div>
+      </a>
+
+      <a href="boardsection.html">
+        <div class="card">
+          <div class="card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="svg-icon">
+              <path d="M9 16.2l-3.5-3.5-1.4 1.4L9 19 20.3 
+              7.7l-1.4-1.4z" fill="currentColor"/>
+            </svg>
+          </div>
+          <div class="card-content">
+            <span id="done" class="card-number">?</span>
+            <p  class="card-label">Done</p>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="card-row">
+      <a href="boardsection.html">
+        <div class="card-urgent">
+          <div class="urgent-left">
+            <div class="urgent-icon">
+              <img src="./svg/Group 7 (1).svg" alt="Urgent Icon" />
+            </div>
+            <div class="urgent-info">
+              <div id="urgent"class="urgent-number">?</div>
+              <div class="urgent-label">Urgent</div>
+            </div>
+          </div>
+          <div class="urgent-divider"></div>
+          <div class="urgent-right">
+            <div id="urgent-date" class="urgent-date">Datum</div>
+            <div class="urgent-subtext">Upcoming Deadline</div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="status-card-row">
+      <a href="boardsection.html">
+        <div class="status-card">
+          <div id="tasks-in-board" class="status-number">?</div>
+          <div class="status-label">Tasks in <br>Board</div>
+        </div>
+      </a>
+
+      <a href="boardsection.html">
+        <div class="status-card">
+          <div id="tasks-in-progress" class="status-number">?</div>
+          <div class="status-label">Tasks In <br>Progress</div>
+        </div>
+      </a>
+
+      <a href="boardsection.html">
+        <div class="status-card">
+          <div id="awaiting-feedback" class="status-number">?</div>
+          <div class="status-label">Awaiting <br>Feedback</div>
+        </div>
+      </a>
+    </div>
+</div>
+<div id="greeting-message">
+  Good morning
+</div>
+    </div>
+  </main>
+
+
+  <script src="JavaScript/navigation.js" type="module"></script>
+  <script src="JavaScript/dropdown-menu.js"></script>
+  <script src="JavaScript/userInitials.js" type="module"></script>
+</body>
+</html>

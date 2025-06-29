@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Join - Sign up</title>
+    <link rel="stylesheet" href="style/loginStyle.css" />
+    <link rel="stylesheet" href="style/signUp.css" />
+    <link rel="stylesheet" href="style/logoAnimation.css" />
+    <link rel="icon" type="image/x-icon" href="svg/Capa 2.svg" />
+  </head>
+  <body>
+    <div class="splash-screen">
+      <img src="svg/Capa 2.svg" alt="Join Logo" class="splash-logo" />
+    </div>
+    <div class="top-bar">
+      <div class="page-logo signup-page-logo">
+        <img src="svg/Capa 2.svg" alt="Join Logo" />
+      </div>
+    </div>
+
+    <div class="max-width-container">
+      <div class="signup-card">
+        <a href="Index.html" class="back-arrow">
+          <img src="svg/arrow-left-line.svg" alt="Back" />
+        </a>
+
+        <h1>Sign up</h1>
+        <div class="blue-line"></div>
+
+        <div id="general-error" class="error-message"></div>
+        <div id="network-error" class="error-message">
+          Keine Internetverbindung verfügbar.
+        </div>
+
+        <form class="signup-form" id="signupForm" onsubmit="return false;">
+          <div class="input-field">
+            <div class="input-wrapper">
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Name"
+                required
+              />
+              <img src="svg/person.svg" alt="Person icon" class="input-icon" />
+              <div id="name-error" class="error-message">
+                Please enter your Fullname (with space)
+              </div>
+            </div>
+          </div>
+
+          <div class="input-field">
+            <div class="input-wrapper">
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Email"
+                required
+              />
+              <img src="svg/mail.svg" alt="Email icon" class="input-icon" />
+              <div id="email-error" class="error-message">
+                Please enter your email address.
+              </div>
+              <div id="email-format-error" class="error-message">
+                Please enter a valid email address.
+              </div>
+            </div>
+          </div>
+
+          <div class="input-field">
+            <div class="input-wrapper">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Password"
+                required
+                minlength="6"
+              />
+              <img src="svg/lock.svg" alt="Password icon" class="input-icon" />
+              <img
+                src="svg/visibility.svg"
+                alt="Show Password"
+                id="togglePassword"
+                class="visibility-icon"
+                style="
+                  position: absolute;
+                  right: 15px;
+                  top: 50%;
+                  transform: translateY(-50%);
+                  cursor: pointer;
+                  width: 20px;
+                "
+              />
+              <div id="password-error" class="error-message">
+                Please enter a password.
+              </div>
+              <div id="password-length-error" class="error-message">
+                The password must be at least 6 characters long.
+              </div>
+              <div id="password-weak-error" class="error-message">
+                Password is too weak.
+              </div>
+            </div>
+          </div>
+
+          <div class="input-field">
+            <div class="input-wrapper">
+              <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                placeholder="Confirm Password"
+                required
+                minlength="6"
+              />
+              <img src="svg/lock.svg" alt="Password icon" class="input-icon" />
+              <img
+                src="svg/visibility.svg"
+                alt="Show Password"
+                id="toggleConfirmPassword"
+                class="visibility-icon"
+                style="
+                  position: absolute;
+                  right: 15px;
+                  top: 50%;
+                  transform: translateY(-50%);
+                  cursor: pointer;
+                  width: 20px;
+                "
+              />
+              <div id="confirm-password-error" class="error-message">
+                Please confirm your password.
+              </div>
+              <div id="password-match-error" class="error-message">
+                Your passwords do not match.
+              </div>
+            </div>
+          </div>
+
+          <div class="privacy-checkbox">
+            <input type="checkbox" id="privacy-policy" required />
+            <label for="privacy-policy"
+              >I accept the
+              <a href="privacy-login.html" class="privacy-link"
+                >Privacy policy</a
+              ></label
+            >
+            <div id="privacy-error" class="error-message">
+              Please accept the privacy policy.
+            </div>
+          </div>
+
+          <button type="submit" class="signup-button" id="signupButton">
+            Sign up
+          </button>
+        </form>
+      </div>
+
+      <div id="success-message" class="success-message">
+        <p>You Signed Up successfully</p>
+      </div>
+
+      <footer class="page-footer">
+        <a href="privacy-login.html">Privacy Policy</a>
+        <a href="Legal-login.html">Legal notice</a>
+      </footer>
+    </div>
+
+    <script src="JavaScript/logoAnimation.js"></script>
+    <script src="JavaScript/sign-up.js" type="module"></script>
+    <script src="JavaScript/database.js" type="module"></script>
+    <script src="JavaScript/showPassword.js"></script>
+  </body>
+</html>

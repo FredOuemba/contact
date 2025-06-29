@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Join - Task Detail Overlay</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: rgba(0, 0, 0, 0.3);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .task-card-overlay {
+      background-color: #fff;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      width: 360px;
+      padding: 24px;
+      position: relative;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 30px;
+    }
+
+    .task-card-label {
+      background-color: #1a73e8;
+      color: white;
+      font-size: 12px;
+      padding: 4px 12px;
+      border-radius: 12px;
+      width: 30%;
+      text-align: center;
+    }
+
+    .task-card-close-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .task-card-title {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 0;
+      line-height: 1.3;
+    }
+
+    .task-card-description {
+      font-size: 14px;
+    }
+
+    .task-card-info {
+      font-size: 14px;
+    }
+
+    .task-card-priority {
+      display: flex;
+      align-items: center;
+    }
+
+    .task-card-priority span {
+      margin-left: 6px;
+      color: orange;
+    }
+
+    .task-card-assigned {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .task-card-person {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .task-card-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+
+    .task-card-name {
+      font-size: 14px;
+    }
+
+    .task-card-subtasks {
+      margin-top: 8px;
+    }
+
+    .task-card-subtasks label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+
+    .task-card-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .task-card-actions button {
+      padding: 6px 12px;
+      font-size: 14px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .task-card-delete-btn {
+      background-color: #f44336;
+      color: white;
+    }
+
+    .task-card-edit-btn {
+      background-color: #e0e0e0;
+    }
+  </style>
+</head>
+<body>
+
+<div class="task-card-overlay">
+  <div class="task-card-label">User Story</div>
+  <div class="task-card-close-btn">&times;</div>
+
+  <div class="task-card-title">Kochwelt Page<br>& Recipe Recommender</div>
+
+  <div class="task-card-description">
+    Build start page with recipe recommendation.
+  </div>
+
+  <div class="task-card-info"><strong>Due date:</strong> 10/05/2023</div>
+  <div class="task-card-info task-card-priority">
+    <strong>Priority:</strong> <span>Medium =</span>
+  </div>
+
+  <div class="task-card-info"><strong>Assigned To:</strong></div>
+  <div class="task-card-assigned">
+    <div class="task-card-person">
+      <div class="task-card-avatar avatar-em">EM</div>
+      <span class="task-card-name">Emmanuel Mauer</span>
+    </div>
+    <div class="task-card-person">
+      <div class="task-card-avatar avatar-mb">MB</div>
+      <span class="task-card-name">Marcel Bauer</span>
+    </div>
+    <div class="task-card-person">
+      <div class="task-card-avatar avatar-am">AM</div>
+      <span class="task-card-name">Anton Mayer</span>
+    </div>
+  </div>
+
+  <div class="task-card-subtasks">
+    <strong>Subtasks</strong>
+    <label><input type="checkbox" checked> Implement Recipe Recommendation</label>
+    <label><input type="checkbox"> Start Page Layout</label>
+  </div>
+
+  <div class="task-card-actions">
+    <button class="task-card-delete-btn">Delete</button>
+    <button class="task-card-edit-btn">Edit</button>
+  </div>
+</div>
+
+</body>
+</html>

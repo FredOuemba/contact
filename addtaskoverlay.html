@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Task (Overlay)</title>
+
+    <link rel="stylesheet" href="style/boss.css" />
+    <link rel="stylesheet" href="style/addtask.css" />
+    <link rel="stylesheet" href="style/addTaskOverlay.css" />
+    <link rel="stylesheet" href="style/addTaskSelfmadeDoms.css">
+  </head>
+  <body onload="fetchDataTasks(); assignedToInput();" style="height: 750px;">
+    
+
+    <main>
+      <div class="maincontent">
+        <div class="h1div"> <h1>Add Task</h1></div>
+ 
+  <form>
+    <div class="form-section">
+
+      <label for="title">Title<span class="required-note"> *</span></label>
+      <input type="text" id="title" placeholder="Enter a title" onfocus="this.classList.add('input-focus')" onblur="this.classList.remove('input-focus')"/>
+      <div id="title-error" class="required-note invisible">This field is required</div>
+
+
+      <label for="desc">Description</label>
+      <textarea id="desc" placeholder="Enter a Description"   onfocus="this.classList.add('input-focus')" onblur="this.classList.remove('input-focus')"></textarea>
+
+      <label for="due-date" style="margin-top:20px;">Due date<span class="required-note">*</span></label>
+      <input type="date" id="due-date" onfocus="this.classList.add('input-focus')" onblur="this.classList.remove('input-focus')"/>
+      <div id="date-error" class="required-note invisible">This field is required</div>
+
+    </div>
+    <div class="line"></div>
+    <div class="form-section">
+      <label>Priority</label>
+      <div class="priority-buttons">
+        <button type="button" class="priority-btn urgent">&nbsp;Urgent&nbsp; <img src="svg/urgent.svg" alt="" srcset=""></button>
+        <button type="button" class="priority-btn medium active-medium">Medium <img src="svg/mediumwhite.svg" alt="" srcset=""></button>
+        <button type="button" class="priority-btn low"> &nbsp;&nbsp;&nbsp;Low&nbsp;&nbsp;&nbsp;  <img src="svg/low.svg" alt=""></button>
+      </div>
+    <div id="priority-error" class="required-note invisible">This field is required</div>
+
+      <label for="assigned">Assigned to</label>
+      <div class="assigned-dropdown" id="assigned-dropdown"  >
+        <div class="assigned-select" id="assigned-select" onclick="openAssignedDropdown(event)">
+          <input
+            type="text"
+            id="assigned-search"
+            class="assigned-search-input"
+            placeholder="Select contacts to assign"
+            oninput="filterAssignedList()"
+          
+          />
+          <img src="./svg/dropdownArrowDown.svg" class="dropdown-arrow" onclick="toggleAssignedDropdown(event); document.getElementById('assigned-select').classList.remove('input-focus')">
+        </div>
+        <div class="assigned-options d-none" id="assigned-list"></div>
+      </div>
+      <div id="selected-avatars" class="selected-avatars"></div>
+      
+
+      
+      <label for="category" style="margin-top:15px;">
+Category<span class="required-note"> *</span>
+</label>
+
+<div class="category-dropdown" id="category-dropdown">
+<div class="category-select">
+  <span id="selected-category" class="category-placeholder">Select task category</span>
+  <img src="svg/dropdownArrowDown.svg" class="dropdown-arrow">
+</div>
+<div class="category-options d-none" id="category-options">
+  <div onclick="selectCategory('Technical Task')">Technical Task</div>
+  <div onclick="selectCategory('User Story')">User Story</div>
+</div>
+</div>
+<div id="category-error" class="required-note invisible">This field is required</div>
+
+
+
+      
+      
+
+     <label for="subtasks">Subtasks</label>
+<div class="subtask-input-container" id="subtask-input-container">
+<input type="text" placeholder="Add new subtask" class="subtask-input"  oninput="toggleSubtaskButtons(this)" />
+<div class="subtask-buttons">
+  <button type="button" class="add-subtask-button" onclick="document.querySelector('.subtask-input').focus()">+</button>
+  <button type="button" class="cancel-subtask-button d-none" onclick="clearSubtaskInput(this)"><img src="svg/XButton.svg" alt=""></button>
+  <div class="subtask-divider"></div>
+  <button type="button" class="confirm-subtask-button d-none" onclick="addSubtask(this)"><img src="svg/checkButton.svg" alt=""></button>
+</div>
+</div>
+<div id="subtask-list-container" class="subtask-list-container">
+<div id="subtask-list" class="subtask-list"></div>
+</div>
+      
+    </div>
+  </form>
+
+  <div class="bottom-buttons">
+    <div>    <span class="required-note">*</span> This field is required</div>
+
+  <div class="bottom-fixed-buttons">
+    <button type="button" class="clear-btn" onclick="clearForm()">Clear X</button>
+
+    <button type="button" class="create-btn" onclick="createTaskFromFormOverlay()">Create Task ✔</button>
+    </div>  
+  </div>
+
+</div>
+    </main>
+
+<script src="JavaScript/addSubtaks.js"></script>
+
+    <script src="JavaScript/addTaskOverlay.js" type="module"></script>
+    <script type="module" src="JavaScript/addTask.js"></script>
+    <script src="JavaScript/fetchAndAddTask.js"></script>
+  </body>
+</html>

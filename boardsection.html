@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join - Board</title>
+
+  <!-- Stylesheets -->
+ 
+ <link rel="stylesheet" href="style/addTaskSelfmadeDoms.css">
+  <link rel="stylesheet" href="style/addtask.css">
+  <link rel="stylesheet" href="style/sidebar.css" />
+  <link rel="stylesheet" href="style/boss.css" />
+  <link rel="stylesheet" href="style/board.css" />
+  <link rel="stylesheet" href="style/board2.css">
+  <link rel="stylesheet" href="style/boardResponsive.css">
+  <link rel="stylesheet" href="style/help.css" />
+  <link rel="stylesheet" href="style/dropdown-menu.css" />
+  <link rel="stylesheet" href="style/header.css" />
+  <link rel="icon" type="image/x-icon" href="svg/Capa 2.svg">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <img src="svg/sidebarLogo.svg" alt="Join Logo">
+    </div>
+  
+    <nav class="sidebar-nav">
+      <a href="summary.html" class="nav-item">
+        <div class="nav-item-content">
+          <img src="./svg/Icons.svg" alt="">
+          <span>Summary</span>
+        </div>
+      </a>
+  
+      <a href="addTask.html" class="nav-item">
+        <div class="nav-item-content">
+          <img src="./svg/Icons (1).svg" alt="">
+          <span>Add Task</span>
+        </div>
+      </a>
+  
+      <a href="boardsection.html" class="nav-item active">
+        <div class="nav-item-content">
+          <img src="./svg/Vector (1) 2.svg" alt="">
+          <span>Board</span>
+        </div>
+      </a>
+  
+      <a href="contacts.html" class="nav-item">
+        <div class="nav-item-content">
+          <img src="./svg/Icons (3).svg" alt="">
+          <span>Contacts</span>
+        </div>
+      </a>
+    </nav>
+  
+    <div class="sidebar-footer">
+      <a href="privacyPolicy.html">Privacy Policy</a>
+      <a href="Legal-notice.html">Legal notice</a>
+    </div>
+  </aside>
+  
+  <header class="page-header">
+    <div class="header-content">  
+      <div class="logo-title">Kanban Project Management Tool</div>
+    <img class="header-logo" src="./svg/Capa 2.svg" alt="">
+    <div class="header-icons">
+      <div class="help-icon" id="helpIcon">?</div>
+      <div class="profile-wrapper">
+        <div class="user-initial-small" id="userInitialButton"></div>
+        
+        <div class="dropdown-menu-small" id="userDropdown">
+            <ul>
+                <li class="mobile-only"><a href="help.html">Help</a></li>
+                <li><a href="Legal-notice.html">Legal Notice</a></li>
+                <li><a href="privacyPolicy.html">Privacy Policy</a></li>
+                <li><a href="Index.html">Log out</a></li>
+            </ul>
+        </div>
+    </div></div>
+  
+  </header>
+<main>
+    <!-- Board Section -->
+    <section class="board-section">
+      <div class="Board-head">
+
+        <div class="header-and-Button">
+        <h1>Board</h1> 
+        <button id="hiddenAddBtn" class="round-plus-btn" onclick="window.location.href = 'addTask.html'">+</button>
+        </div>
+        <div class="add-find-task">
+          <div class="search-container">
+            <input type="text" id="taskSearchInput" placeholder="Find Task" oninput="handleTaskSearch()"/>
+            <span class="search-icon">
+              <img src="svg/search.svg" alt="" />
+            </span>
+          </div>
+          <button class="add-task-btn">
+            Add task <span class="plus-icon">+</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Board Columns -->
+      <section class="board-cards">
+        <!-- To do -->
+        <div class="progress-section dropzone" ondragover="allowDrop(event); handleDragOver(event)" ondrop="drop(event)"  
+        ondragleave="handleDragLeave(event)">
+          <div class="to-do-header">
+            <p>To do</p>
+            <button class="icon-btn"><span class="plus-icon">+</span></button>
+          </div>
+          
+          <div class="no-tasks"><p>No tasks To Do</p></div>
+
+          
+        </div>
+        
+        <!-- In progress -->
+        <div class="progress-section dropzone" ondragover="allowDrop(event); handleDragOver(event)" ondrop="drop(event)"  
+        ondragleave="handleDragLeave(event)">
+          <div class="to-do-header">
+            <p>In progress</p>
+            <button  class="icon-btn"><span class="plus-icon">+</span></button>
+          </div>
+          <div class="no-tasks"><p>No tasks To Do</p></div>
+
+         
+        </div>
+
+        <!-- Await Feedback -->
+        <div class="progress-section dropzone" ondragover="allowDrop(event); handleDragOver(event)" ondrop="drop(event)" 
+        ondragleave="handleDragLeave(event)">
+          <div class="to-do-header">
+            <p>Await Feedback</p>
+            <button  class="icon-btn"><span class="plus-icon">+</span></button>
+          </div>
+          <div class="no-tasks"><p>No tasks To Do</p></div>
+        </div>
+
+        <!-- Done -->
+        <div class="progress-section dropzone"  ondragover="allowDrop(event); handleDragOver(event)" ondrop="drop(event)" 
+        ondragleave="handleDragLeave(event)">
+          <div class="to-do-header"><p>Done</p></div>
+          <div class="no-tasks"><p>No tasks To Do</p></div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <!-- Add Task Modal Overlay -->
+  <div id="addTaskModal" class="modal d-none">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeAddTaskModal()">×</span>
+      <iframe src="addtaskoverlay.html"></iframe>
+
+    </div>
+  </div>
+
+  <div id="overlay-container"></div>
+
+
+  <script src="JavaScript/addTask.js" type="module"></script>
+  <script src="JavaScript/fetchAndAddTask.js"></script>
+  <script src="JavaScript/TaskCardTemplate_Part1.js"></script>
+  <script src="JavaScript/TaskCardTemplate_Part2.js"></script>
+  <script src="JavaScript/TaskCardTemplate_Part3.js"></script>
+  <script src="JavaScript/TaskCardTemplate_Part4.js"></script>
+  <script src="JavaScript/userInitials.js" type="module"></script>
+  <script src="JavaScript/dropdown-menu.js"></script>
+  <script src="JavaScript/board.js" type="module"></script>
+  <script src="JavaScript/summary.js" type="module"></script>
+  <script src="JavaScript/navigation.js" type="module"></script>
+  <script src="JavaScript/board-add-task-modal.js" type="module"></script>
+  <script src="JavaScript/addTaskOverlay.js" type="module"></script>
+
+</body>
+</html>

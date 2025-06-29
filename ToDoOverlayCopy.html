@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Join - Task Overlay</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: rgba(0, 0, 0, 0.3);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      gap: 20px;
+    }
+
+    .nav-button {
+      font-size: 24px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .task-card-overlay {
+      background-color: #fff;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      width: 360px;
+      padding: 24px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .task-card-label {
+      background-color: #1a73e8;
+      color: white;
+      font-size: 12px;
+      padding: 4px 12px;
+      border-radius: 12px;
+      width: fit-content;
+      text-align: center;
+    }
+
+    .task-card-close-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .task-card-title {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 0;
+      line-height: 1.3;
+    }
+
+    .task-card-description {
+      font-size: 14px;
+    }
+
+    .task-card-info {
+      font-size: 14px;
+    }
+
+    .task-card-priority {
+      display: flex;
+      align-items: center;
+    }
+
+    .task-card-priority span {
+      margin-left: 6px;
+      color: orange;
+    }
+
+    .task-card-assigned {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .task-card-person {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .task-card-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 12px;
+      font-weight: bold;
+      color: white;
+    }
+
+    .task-card-name {
+      font-size: 14px;
+    }
+
+    .task-card-subtasks {
+      margin-top: 8px;
+    }
+
+    .task-card-subtasks label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+
+    .task-card-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .task-card-actions button {
+      padding: 6px 12px;
+      font-size: 14px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .task-card-delete-btn {
+      background-color: #f44336;
+      color: white;
+    }
+
+    .task-card-edit-btn {
+      background-color: #e0e0e0;
+    }
+  </style>
+</head>
+<body>
+
+  <button class="nav-button" onclick="prevTask()">⬅</button>
+  <div id="overlay-container"></div>
+  <button class="nav-button" onclick="nextTask()">➡</button>
+
+<script>
+  // === Avatar Tools from Contacts ===
+  const avatarColors = [
+    "#FF7A00", "#FF5C01", "#FFBB2E", "#0095FF",
+    "#6E52FF", "#9327FF", "#00BEE8", "#1FD7C1",
+    "#FF4646", "#FFC700", "#BEE800"
+  ];
+
+  function getColorForName(name) {
+    let hash = 0;
+    for (let i = 0; i < name.length; i++) {
+      hash = name.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    return avatarColors[Math.abs(hash % avatarColors.length)];
+  }
+
+  function getInitials(name) {
+    if (!name) return "";
+    const parts = name.trim().split(" ");
+    return (parts[0][0] + (parts[1]?.[0] || "")).toUpperCase();
+  }
+
+  // === Task Overlay ===
+  let allTasks = [];
+  let currentTaskIndex = 0;
+
+  async function fetchJson(url) {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error("Fehler bei Fetch: " + url);
+    return await res.json();
+  }
+
+  async function loadAllTasks() {
+    try {
+      const [taskData, peopleData] = await Promise.all([
+        fetchJson("https://join-2aee1-default-rtdb.europe-west1.firebasedatabase.app/Tasks.json"),
+        fetchJson("https://join-2aee1-default-rtdb.europe-west1.firebasedatabase.app/person.json")
+      ]);
+
+      allTasks = Object.entries(taskData).map(([id, task]) => {
+        const personIds = Object.values(task.assignedTo || {});
+        const assignedPeople = personIds.map(pid => peopleData[pid]).filter(Boolean);
+        return { id, ...task, assignedPeople };
+      });
+
+      renderTaskByIndex(0);
+    } catch (err) {
+      console.error("Fehler beim Laden:", err);
+    }
+  }
+
+  function renderTaskByIndex(index) {
+    if (!allTasks[index]) return;
+    currentTaskIndex = index;
+    const task = allTasks[index];
+    document.getElementById("overlay-container").innerHTML = buildTaskOverlay(task);
+  }
+
+  function buildTaskOverlay(task) {
+    const subtasksHtml = buildSubtasks(task.subtasks);
+    const peopleHtml = task.assignedPeople.map(person => {
+      const initials = getInitials(person.name);
+      const bg = getColorForName(person.name);
+      return `
+        <div class="task-card-person">
+          <div class="task-card-avatar" style="background-color:${bg}">${initials}</div>
+          <span class="task-card-name">${person.name}</span>
+        </div>`;
+    }).join("");
+
+    return `
+      <div class="task-card-overlay">
+        <div class="task-card-label">${task.category || "Kategorie"}</div>
+        <div class="task-card-close-btn" onclick="closeOverlay()">&times;</div>
+
+        <div class="task-card-title">${task.title || "Kein Titel"}</div>
+        <div class="task-card-description">${task.description || ""}</div>
+
+        <div class="task-card-info"><strong>Due date:</strong> ${task.dueDate || "-"}</div>
+        <div class="task-card-info task-card-priority">
+          <strong>Priority:</strong> <span>${task.priority || "-"}</span>
+        </div>
+
+        <div class="task-card-info"><strong>Assigned To:</strong></div>
+        <div class="task-card-assigned">${peopleHtml}</div>
+
+        <div class="task-card-subtasks">
+          <strong>Subtasks</strong>
+          ${subtasksHtml}
+        </div>
+
+        <div class="task-card-actions">
+          <button class="task-card-delete-btn">Delete</button>
+          <button class="task-card-edit-btn">Edit</button>
+        </div>
+      </div>`;
+  }
+
+  function buildSubtasks(subtasks) {
+    if (!subtasks || typeof subtasks !== "object") {
+      return `<p style="font-style: italic; color: gray;">Keine Subtasks vorhanden</p>`;
+    }
+
+    if (subtasks.title) {
+      return `<label><input type="checkbox"> ${subtasks.title}</label>`;
+    }
+
+    return Object.entries(subtasks).map(([key, sub]) => {
+      return `<label><input type="checkbox" ${sub.done ? "checked" : ""}> ${sub.title}</label>`;
+    }).join("");
+  }
+
+  function nextTask() {
+    if (currentTaskIndex < allTasks.length - 1) {
+      renderTaskByIndex(currentTaskIndex + 1);
+    }
+  }
+
+  function prevTask() {
+    if (currentTaskIndex > 0) {
+      renderTaskByIndex(currentTaskIndex - 1);
+    }
+  }
+
+  function closeOverlay() {
+    document.getElementById("overlay-container").innerHTML = "";
+  }
+
+  // Start
+  loadAllTasks();
+</script>
+
+</body>
+</html>
