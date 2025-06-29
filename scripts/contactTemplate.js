@@ -51,12 +51,12 @@ function contactDetailTemplate(contact) {
           <div><h2 style="margin:0;">${contact.name}</h2>
           <div style="display:flex;margin-top:10px;">
           <button onclick="editContact('${contact.name}')" class="contact-detail-buttons">
-  <img class="icon-default" src="./svg/edit-black.svg" alt="Edit">
-   <img class="icon-hover" src="./svg/edit-blue-hover.svg" alt="Edit">Edit
+  <img class="icon-default" src="./assets/edit.png" alt="Edit">
+   <img class="icon-hover" src="./assets/edit-blue-hover.png" alt="Edit">Edit
 </button>
           <button onclick="deleteContact('${contact.name}')" class="contact-detail-buttons">
-            <img class="icon-default" src="./svg/delete.svg" alt="Delete">
-             <img class="icon-hover" src="./svg/delete-blue-hover.svg" alt="Delete">Delete
+            <img class="icon-default" src="./assets/delete.png" alt="Delete">
+             <img class="icon-hover" src="./assets/delete-blue-hover.png" alt="Delete">Delete
           </button>
           </div>
           </div>
@@ -92,7 +92,7 @@ function contactAddFormTemplate() {
     <div class="add-contact-overlay">
       <div class="close-btn" onclick="closeOverlayDirectly()">×</div>
       <div class="add-contact-left">
-        <img src="./svg/Capa 1.svg" class="add-contact-logo">
+        <img src="./assets/sidebarLogo.png" class="add-contact-logo">
         <h2>Add contact</h2>
         <p>Tasks are better with a team!</p>
         <div class="underline"></div>
@@ -150,7 +150,7 @@ function contactEditFormTemplate(contact) {
     <div class="add-contact-overlay">
       <div class="close-btn" onclick="closeOverlayDirectly(); showContact('${contact.name}')">&times;</div>
       <div class="add-contact-left">
-        <img src="./svg/Capa 1.svg" class="add-contact-logo">
+        <img src="./assets/sidebarLogo.png"class="add-contact-logo">
         <h2>Edit contact</h2>
         <div class="underline"></div>
       </div>
