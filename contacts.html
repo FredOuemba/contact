@@ -10,11 +10,12 @@
     <link rel="stylesheet" href="styles/dropdown-menu.css">
     <link rel="stylesheet" href="styles/header.css">
     <link rel="stylesheet" href="styles/help.css">
+    <link rel="stylesheet" href="styles/edit-contact-overlay.css">
   </head>
   <body onload="fetchData()">
     <div id="successMessage" class="contact-created">Contact successfully created</div>
 
-    <!-- Neue Sidebar (wie in addTask.html, Bilder auf assets/ und .png angepasst) -->
+    <!-- Sidebar -->
     <aside class="sidebar">
       <nav class="sidebar-nav">
         <div class="sidebar-logo-header">
@@ -51,7 +52,7 @@
       </div>
     </aside>
 
-    <!-- Neues Header (wie in addTask.html, Logo-Pfad angepasst) -->
+    <!-- Header -->
     <header class="page-header">
       <img src="assets/sidebarLogo.png" alt="Join Logo" class="header-join-logo-absolute">
       <div class="header-right">
@@ -73,26 +74,23 @@
       </div>
     </header>
 
-    <!-- Main Content bleibt erhalten -->
+    <!-- Main Content -->
     <div class="left-side">
       <button class="new-contact d_none" id="new-contact" onclick="addContact()">
         <span class="button-label">Add new contact</span>
-        <img src="./svg/person_add.svg" alt="Add contact" class="button-icon" />
+        <img src="./assets/person_add.png" alt="Add contact" class="button-icon" />
       </button>
       <div class="contact-panel" id="contactPanel"></div>
     </div>
     <div class="main">
       <div class="contact-info">
-        <div class="contact-info-headline">
-          <div class="contactInfo-title">Contacts</div>
-          <div class="contactInfo-subtitle">Better with a team</div>
-        </div>
+        <div class="contact-info-headline"></div>
         <div class="overlay" id="overlay"></div>
       </div>
     </div>
+    <!-- HIER: Entferne die zentrierende Klasse 'editContact' -->
     <div id="modalBackdrop" class="modal-backdrop d_none" onclick="closeOverlay(event)">
-      <div id="addContactForm" class="editContact" onclick="event.stopPropagation()">
-      </div>
+      <div id="addContactForm" onclick="event.stopPropagation()"></div>
     </div>
     <div id="contactCreatedImage" class="contact-created-image d_none">
       <img src="svg/contactCreated.svg" alt="Contact Created">
