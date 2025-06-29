@@ -1,0 +1,695 @@
+body {
+  font-family: 'Inter', Arial, sans-serif;
+  background-color: #f6f7fb;
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+main {
+  margin-left: 232px;
+  margin-top: 80px;
+  height: calc(100vh - 80px);
+  background: #fff;
+  display: flex;
+  align-items: flex-start;
+}
+
+.maincontent {
+  max-width: 900px;
+  width: 25%;
+  margin: 0;
+  padding: 0 60px 0 60px;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  height: calc(100vh - 50px);
+  overflow-y: auto;
+  overflow-x: auto;
+  position: relative;
+  scrollbar-gutter: stable both-edges;
+}
+
+
+.h1div {
+  margin-top: 30px;
+}
+h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #2a3647;
+  margin-bottom: 32px;
+  margin-top: 0;
+  letter-spacing: 0.01em;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+}
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+}
+
+label {
+  font-size: 19px;
+  font-weight: 700;
+  color: #2a3647;
+  margin-bottom: 5px;
+  margin-top: 22px;
+  letter-spacing: 0.01em;
+}
+label:first-child { margin-top: 0; }
+label .optional,
+label .required-note {
+  font-size: 14px;
+  color: #7d8ba1;
+  font-weight: 400;
+  margin-left: 3px;
+}
+
+input[type="text"], textarea {
+  width: 100%;
+  max-width: 440px;
+  padding: 18px 0 8px 0;
+  font-size: 20px;
+  border: none;
+  border-bottom: 2px solid #e5e7eb;
+  border-radius: 0;
+  box-sizing: border-box;
+  background: #fff;
+  color: #2a3647;
+  font-family: inherit;
+  transition: border-color 0.2s;
+  cursor: pointer;
+}
+input[type="text"]:focus, textarea:focus {
+  border-bottom: 2px solid #4589FF;
+  outline: none;
+}
+#desc:focus, textarea#desc:focus {
+  border: 1.5px solid #4589FF !important;   
+  box-shadow: 0 0 0 2px #d2e3ff;           
+  outline: none;
+}
+
+textarea {
+  resize: vertical;
+  overflow-y: auto;
+  width: 100%;
+  max-width: 440px;
+  height: 154px;
+  font-size: 20px;
+  font-family: inherit;
+  background: #fff;
+  border-radius: 8px;
+  border: 1.5px solid #e5e7eb;
+  box-sizing: border-box;
+  padding: 16px 12px;
+  margin-bottom: 18px;
+  transition: border-color 0.2s;
+  color: #2a3647;
+}
+
+input[type="text"]::placeholder,
+textarea::placeholder {
+  color: #b3b3b3;
+  font-size: 20px;
+  opacity: 1;
+}
+
+/* ==== Custom Datepicker Style ==== */
+.custom-date-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 440px;
+  border-bottom: 2px solid #e5e7eb;
+  margin-bottom: 18px;
+  padding-right: 6px;
+  transition: border-color 0.2s;
+  min-height: 60px;
+  background: #fff;
+  box-sizing: border-box;
+}
+.custom-date-row:focus-within {
+  border-bottom: 2px solid #4589FF;
+}
+.custom-date-input {
+ border: none !important;
+  border-bottom: none !important;
+  border-top: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  background: transparent;
+  font-size: 20px;
+  color: #2a3647;
+  flex: 1;
+  padding: 18px 0 8px 0;
+  outline: none;
+  font-family: inherit;
+  width: 100%;
+  max-width: 440px;
+  cursor: pointer;
+}
+.custom-date-input::placeholder {
+  color: #b3b3b3;
+  font-size: 20px;
+  opacity: 1;
+  user-select: none;
+}
+.calendar-btn {
+  background: none;
+  border: none;
+  padding: 0 10px 0 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  height: 38px;
+  margin-left: 4px;
+}
+.calendar-icon {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+/* Hide native date input */
+input[type="date"]#hiddenDateInput {
+  display: none;
+}
+
+/* ========== Priority Buttons ========== */
+.priority-buttons {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 18px;
+  margin-top: 6px;
+}
+
+/* Pflichtfeld rot markieren */
+.input-error,
+.input-error:focus {
+  border-bottom: 2px solid #ff5d5d !important;
+  outline: none;
+}
+
+.input-error-message {
+  color: #ff5d5d;
+  font-size: 14px;
+  margin-top: 2px;
+  margin-bottom: 12px;
+  font-family: inherit;
+  padding-left: 2px;
+  min-height: 18px;
+}
+
+.priority-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 22px;
+  font-size: 19px;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  background: #fff;
+  color: #2a3647;
+  cursor: pointer;
+  font-weight: 400;
+  transition: border-color 0.2s;
+  width: 136px;
+  height: 51px;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* Urgent & Low: Hover-Effekt NUR untere Border färben, Inhalt bleibt */
+.priority-btn.urgent:hover:not(.active-urgent) {
+  border-color: #e5e7eb;
+  border-bottom:3px solid #ff3d00;
+  color: #2a3647;
+  background: #fff;
+}
+.priority-btn.low:hover:not(.active-low) {
+  border-color: #e5e7eb;
+  border-bottom: 3px solid #7ae229;
+  color: #2a3647;
+  background: #fff;
+}
+/* Urgent & Low: Standard (nicht aktiv) */
+.priority-btn.urgent:not(.active-urgent),
+.priority-btn.low:not(.active-low) {
+  border-bottom: 2px solid #e5e7eb;
+}
+/* Urgent & Low aktiv */
+.priority-btn.active-urgent {
+  background: #ff3d00;
+  color: #fff;
+  border-color: #ff3d00;
+}
+.priority-btn.active-low {
+  background: #7ae229;
+  color: #fff;
+  border-color: #7ae229;
+}
+/* Medium: kein Hover, immer orange */
+.priority-btn.medium,
+.priority-btn.active-medium {
+  background: #ffa800;
+  color: #fff;
+  border-color: #ffa800;
+  pointer-events: none;
+}
+/* Priority-Icons invertieren wenn aktiv */
+.priority-btn.active-urgent img,
+.priority-btn.active-medium img,
+.priority-btn.active-low img {
+  filter: brightness(0) invert(1);
+}
+/* Priority-Icons beim Hover anpassen (bleibt farbig) */
+.priority-btn.urgent:hover:not(.active-urgent) img,
+.priority-btn.low:hover:not(.active-low) img {
+  filter: none;
+}
+
+/* ========== Dropdown Arrow ========== */
+.dropdown-arrow-hover-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 36px;
+  position: relative;
+}
+.dropdown-arrow-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  transition: background 0.12s;
+  cursor: pointer;
+  margin: 0 auto;
+}
+.dropdown-arrow {
+  pointer-events: none;
+  width: 16px;
+  height: 16px;
+  opacity: 0.85;
+  transition: filter 0.15s, opacity 0.15s;
+  display: block;
+  margin: 0 auto;
+}
+.dropdown-arrow-hover-area:hover .dropdown-arrow-wrapper,
+.dropdown-arrow-hover-area:focus-within .dropdown-arrow-wrapper {
+  background: #dbeaff;
+}
+.dropdown-arrow-hover-area:hover .dropdown-arrow,
+.dropdown-arrow-hover-area:focus-within .dropdown-arrow {
+  filter: none;
+  opacity: 1;
+}
+
+/* ========== Assigned to, Category, Subtasks WIDTH FIX ========== */
+.assigned-dropdown,
+.category-dropdown,
+.subtask-input-row {
+  width: 100%;
+  max-width: 440px;
+  box-sizing: border-box;
+}
+
+.assigned-select,
+.category-select {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 44px;
+}
+
+.assigned-search-input,
+.category-placeholder {
+  width: 100%;
+}
+
+/* ========== Linie unten für Assigned to, Category und Subtasks ========== */
+.assigned-select {
+  width: 100%;
+  border-bottom: 2px solid #e5e7eb;
+  border-radius: 0;
+  background: #fff;
+  box-sizing: border-box;
+  margin-bottom: 18px;
+  padding-right: 6px;
+  transition: border-color 0.2s;
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+}
+.assigned-select:focus-within {
+  border-bottom: 2px solid #4589FF;
+}
+.assigned-search-input {
+  border: none !important;
+  outline: none;
+  background: transparent;
+  width: 100%;
+  font-size: 20px;
+  color: #2a3647;
+  padding: 18px 0 8px 0;
+  font-family: inherit;
+  box-shadow: none;
+}
+.assigned-search-input::placeholder {
+  color: #b3b3b3;
+  font-size: 20px;
+  opacity: 1;
+}
+
+/* Category Dropdown Anpassung */
+.category-dropdown {
+  width: 100%;
+  max-width: 440px;
+  position: relative;
+  margin-bottom: 20px;
+}
+.category-select {
+  width: 100%;
+  background: #fff;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding-right: 6px;
+  border-bottom: 2px solid #e5e7eb;
+  cursor: pointer;
+  position: relative;
+  border-radius: 0;
+  transition: border-bottom-color 0.2s;
+  user-select: none;
+}
+.category-select.active,
+.category-select.has-value {
+  border-bottom: 2px solid #4589FF;
+}
+.category-placeholder {
+  color: #b3b3b3;
+  font-size: 20px;
+  padding: 18px 0 8px 0;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  height: 36px;
+  opacity: 0.6;
+}
+.category-select.has-value .category-placeholder {
+  color: #2a3647;
+  opacity: 1;
+  font-weight: 500;
+}
+.category-dropdown .dropdown-arrow-hover-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 36px;
+  position: relative;
+}
+.category-dropdown .dropdown-arrow-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  transition: background 0.12s;
+  cursor: pointer;
+  margin: 0 auto;
+}
+.category-dropdown .dropdown-arrow-wrapper.arrow-hover {
+  background: #dbeaff;
+}
+.category-arrow {
+  pointer-events: none;
+  width: 18px;
+  height: 18px;
+  opacity: 1;
+  display: block;
+  margin: 0 auto;
+  transition: transform 0.2s;
+}
+.category-arrow polyline {
+  stroke: #4589FF;
+  transition: stroke 0.14s;
+}
+.category-options {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px 0 rgba(69,137,255,0.07);
+  margin-top: 4px;
+  padding: 6px 0;
+  width: 100%;
+  max-width: 440px;
+  position: absolute;
+  left: 0;
+  z-index: 10;
+  font-size: 18px;
+  color: #2a3647;
+  border: 1.5px solid #e5e7eb;
+}
+.category-option {
+  padding: 12px 18px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.12s;
+  outline: none;
+  font-size: 18px;
+}
+.category-option.selected,
+.category-option:hover,
+.category-option:focus {
+  background: #D2E3FF !important;
+}
+
+/* Subtask input bottom border: nur EINE Linie! */
+.subtask-input-row {
+  width: 100%;
+  max-width: 440px;
+  box-sizing: border-box;
+  border-bottom: 2px solid #e5e7eb;
+  border-radius: 0;
+  background: #fff;
+  margin-bottom: 18px;
+  padding-right: 6px;
+  transition: border-color 0.2s;
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+}
+.subtask-input-row:focus-within {
+  border-bottom: 2px solid #4589FF;
+}
+.subtask-input {
+  border: none !important;
+  outline: none;
+  background: transparent;
+  width: 100%;
+  font-size: 16px;
+  color: #b3b3b3;
+  padding: 8px 0;
+  font-family: inherit;
+  box-shadow: none;
+}
+
+#subtask-list-container,
+#subtask-list {
+  border: none !important;
+  background: none;
+}
+
+.add-subtask-button-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  transition: background 0.12s;
+  cursor: pointer;
+}
+.add-subtask-button {
+  background: none;
+  border: none;
+  color: #4589ff;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.16s;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+}
+.add-subtask-button:focus {
+  outline: none;
+}
+.add-subtask-button-wrapper:hover,
+.add-subtask-button-wrapper:focus-within {
+  background: #dbeaff;
+}
+.add-subtask-button-wrapper:hover .add-subtask-button,
+.add-subtask-button-wrapper:focus-within .add-subtask-button {
+  color: #005DFF;
+}
+
+.subtask-list-container {
+  margin-bottom: 16px;
+  background: none;
+  border: none;
+}
+
+/* ========== Bottom Buttons ========== */
+.bottom-buttons {
+  position: fixed;
+  right: 48px;
+  bottom: 10px;
+  background: transparent;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  z-index: 20;
+}
+.bottom-fixed-buttons {
+  display: flex;
+  gap: 16px;
+}
+
+.clear-btn {
+  background: #fff;
+  color: #42526e;
+  border: 2px solid #b3b3b3;
+  font-size: 20px;
+  font-weight: 500;
+  border-radius: 12px;
+  padding: 14px 20px;
+  box-shadow: 0 2px 8px 0 rgba(69,137,255,0.10);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  outline: none;
+  transition:
+    background 0.14s,
+    color 0.14s,
+    border-color 0.14s,
+    box-shadow 0.19s,
+    transform 0.16s;
+}
+.clear-btn .x {
+  font-size: 22px;
+  font-weight: 400;
+  color: inherit;
+  margin-left: 6px;
+  letter-spacing: 1px;
+  transition: color 0.14s;
+}
+.clear-btn:hover,
+.clear-btn:focus-visible {
+  background: #f4faff;
+  color: #4589FF;
+  border-color: #4589FF;
+  box-shadow: 0 8px 20px 0 rgba(69,137,255,0.16);
+}
+.clear-btn:hover .x,
+.clear-btn:focus-visible .x {
+  color: #4589FF;
+}
+.clear-btn:active {
+  background: #e6f0ff;
+  color: #2563d6;
+  border-color: #2563d6;
+}
+.clear-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ========== CREATE BUTTON ========== */
+.create-btn {
+  background: #4589FF;
+  color: #fff;
+  border: none;
+  font-size: 20px;
+  font-weight: 400;
+  border-radius: 12px;
+  padding: 14px 12px;
+  transition: background 0.15s, transform 0.17s;
+  box-shadow: 0 2px 8px 0 rgba(69,137,255,0.10);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+}
+.create-btn:hover {
+  background: #005DFF;
+}
+
+/* ========== Responsive Anpassungen ========== */
+@media (max-width: 1080px) {
+  .maincontent { padding-left: 20px; padding-right: 20px; }
+  .bottom-buttons { right: 12px; bottom: 12px; }
+}
+@media (max-width: 850px) {
+  main { margin-left: 70px; }
+}
+@media (max-width: 768px) {
+  .maincontent { padding: 0 8px; }
+  main { margin-left: 0; }
+  .bottom-buttons { right: 6px; bottom: 6px; }
+}
+@media (max-width: 600px) {
+  .clear-btn, .create-btn {
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 16px;
+  }
+  .assigned-dropdown,
+  .category-dropdown,
+  .subtask-input-row,
+  #subtask-list-container,
+  #subtask-list,
+  .custom-date-row {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    border: none;
+  }
+}
+
+/* ========== Utility ========== */
+.d-none {
+  display: none !important;
+}
+.input-error,
+.input-error:focus {
+  border-bottom: 2px solid #ff5d5d !important;
+  outline: none;
+}
+
+/* Für Container wie .custom-date-row */
+.custom-date-row.input-error {
+  border-bottom: 2px solid #ff5d5d !important;
+}

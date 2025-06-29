@@ -1,0 +1,192 @@
+
+@media (max-width:1320px) {
+    .Board-head {
+      gap: 100px;
+    }
+  
+    .progress-section {
+      padding: 6px;
+    }
+  
+  }
+  
+  @media (max-width:1200px) {
+  
+    .card {
+      width: 180px;
+    }
+  
+  }
+  
+  
+  @media (max-width: 1145px) {
+    .Board-head {
+      flex-direction: column;
+      margin-left: 0;
+    }
+  
+    .responsive-swap img {
+      display: block;
+    }
+  
+    h1  {
+      margin-bottom: 0;
+      margin-top: 0 !important;
+    }
+  .round-plus-btn {
+    margin-top: 0%;
+  }
+  
+    .header-and-Button {
+      justify-content: space-between;
+      margin: 12px;
+    }
+  
+    .round-plus-btn {
+      display: block !important;
+    }
+  
+    .add-task-btn {
+      display: none;
+    }
+  
+    .add-find-task {
+      margin: 12px;
+  
+    }
+  
+    .search-container {
+      width: 100%;
+    }
+  
+    .board-cards {
+      flex-direction: column;
+      gap: 12px;
+     
+    }
+  
+  
+  
+    .card-bucket {
+      display: flex;
+      overflow-x: auto;
+      min-height: 200px;
+      width: 72vw;
+      gap: 12px;
+      padding-bottom: 8px;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;        /* Firefox */
+      -ms-overflow-style: none;     /* IE 10+ */
+    }
+  h1 {
+    border-bottom: 0 !important;
+  }
+  
+    .board-cards {
+      height: auto;
+      width: 100%;
+    }
+  
+  
+    .card {
+      min-width: 220px;
+      scroll-snap-align: start;
+      flex-shrink: 0;
+    }
+  
+    .progress-section {
+      height: auto;
+    }
+  }
+  
+  
+  @media (max-width:894px) {
+  
+    .card-bucket {
+      width: 65vw;
+  
+    }
+  
+    .board-section {
+  
+      width: calc(100vw - 245px);
+  }
+  }
+  
+  @media (max-width:768px) {
+    .board-section {
+      margin-left: 0px;
+      width: 100vw;
+    }
+  
+    .card-bucket {
+      display: flex;
+      overflow-x: auto;
+      min-height: 200px;
+      width: 95vw;
+      gap: 12px;
+      padding-bottom: 8px;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;        /* Firefox */
+      -ms-overflow-style: none;     /* IE 10+ */
+    }
+  
+    .board-cards {
+      height: auto;
+  
+    }
+  
+   
+    .card-bucket::-webkit-scrollbar {
+      display: none;                /* Chrome, Safari */
+    }
+    
+    /* 🆕 Optional: Card Snap-Style fürs bessere Scroll-Erlebnis */
+    .card {
+      min-width: 220px;
+      scroll-snap-align: start;
+      flex-shrink: 0;
+    }
+  
+    body {
+      margin-bottom: 700px;
+      justify-content: space-around;
+    }
+  
+    .add-find-task {
+      margin: 12px;
+  
+    }
+  
+  
+  
+    .progress-section {
+      width: auto;
+      height: auto;
+    }
+  }
+  
+  
+  @media (max-height:894px) {
+  
+    .task-card-overlay {
+      gap: 10px;
+  
+    }
+  
+  }
+  
+  @media (max-height:700px) {
+  
+    .task-card-overlay {
+      gap: 5px;
+  
+    }
+  
+  
+  
+    .board-cards {
+      height: auto;
+      padding-bottom: 100px;
+  }
+  }

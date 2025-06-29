@@ -1,0 +1,134 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #F6F7F8;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+}
+
+.content-container {
+    flex: 1;
+    padding: 40px;
+    margin-left: 232px;
+    margin-top: 80px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    min-height: calc(100vh - 80px);
+}
+
+.content-container-help {
+    flex: 1;
+    padding: 40px;
+    margin-left: 232px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    min-height: calc(100vh - 80px);
+}
+
+.legal-notice-container {
+    max-width: 800px;
+    padding-bottom: 80px;
+}
+
+.policy-title {
+    font-size: 48px;
+    color: #2A3647;
+    margin-bottom: 40px;
+    margin-top: 20px;
+}
+
+.policy-section {
+    margin-bottom: 30px;
+}
+
+.policy-section h3 {
+    font-size: 24px;
+    color: #2A3647;
+    margin-bottom: 16px;
+}
+
+.policy-section p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #2A3647;
+    margin-bottom: 16px;
+}
+
+@media (max-width: 1024px) {
+    .content-container {
+        padding: 30px;
+    }
+    
+    .policy-title {
+        font-size: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+    
+    .sidebar {
+        width: 100%;
+        min-height: auto;
+        position: fixed;
+        bottom: 0;
+        top: auto;
+        height: 80px;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        padding: 0;
+    }
+    
+    .page-header {
+        left: 0;
+    }
+    
+    .content-container {
+        margin-left: 0;
+        margin-bottom: 80px;
+        padding: 20px;
+    }
+    
+    .policy-title {
+        font-size: 36px;
+        margin-top: 10px;
+        margin-bottom: 30px;
+    }
+    
+    .policy-section h3 {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-header {
+        padding: 0 15px;
+    }
+    
+    .content-container {
+        margin-top: 100px;
+    }
+    
+    .policy-title {
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+
+    .policy-title-help {
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+    
+    .policy-section h3 {
+        font-size: 18px;
+    }
+    
+    .policy-section p {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+}

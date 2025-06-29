@@ -1,0 +1,48 @@
+/* Privacy Policy Content Styles */
+.main-content {
+    padding: 2rem;
+    margin-left: 232px; /* Sidebar width */
+    min-height: 100vh;
+    background-color: #F6F7F8;
+}
+
+.main-header {
+    margin-bottom: 2rem;
+}
+
+.main-header h1 {
+    font-size: 1.5rem;
+    color: #2A3647;
+    font-weight: 400;
+}
+
+.content-container {
+    background-color: white;
+    border-radius: 30px;
+    padding: 2rem;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+.policy-title {
+    font-size: 2rem;
+    color: #2A3647;
+    margin-bottom: 2rem;
+    font-weight: 700;
+}
+
+.policy-section {
+    margin-bottom: 2rem;
+}
+
+.policy-section h3 {
+    font-size: 1.25rem;
+    color: #2A3647;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.policy-section p {
+    color: #2A3647;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+} 

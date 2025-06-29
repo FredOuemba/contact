@@ -1,0 +1,97 @@
+.back-button {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.back-button a {
+    color: #29ABE2;
+    text-decoration: none;
+}
+
+.back-button a:hover {
+    background-color: #edeeee;
+    border-radius: 10px;
+    height: 28px;
+    width: 28px;
+}
+
+.back-button img {
+    width: 24px;
+    height: 24px;
+    display: block;
+}
+
+.help-title {
+    font-size: 61px;
+    color: #2A3647;
+    margin-bottom: 40px;
+    margin-top: 40px;
+}
+
+.help-section {
+    margin-bottom: 40px;
+}
+
+.help-section h3 {
+    font-size: 28px;
+    color: #2A3647;
+    margin-bottom: 20px;
+}
+
+.help-section p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #2A3647;
+    margin-bottom: 20px;
+}
+
+.help-list {
+    margin-left: 20px;
+    margin-bottom: 30px;
+}
+
+.help-list-item {
+    margin-bottom: 20px;
+}
+
+.help-list-item h4 {
+    font-size: 20px;
+    color: #2A3647;
+    margin-bottom: 10px;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.join-highlight {
+    color: #29ABE2;
+}
+
+.profile-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.user-initial-small {
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.user-initial-small:hover {
+    background-color: #e3e7ec;
+}
