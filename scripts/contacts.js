@@ -23,7 +23,7 @@ function getInitials(name) {
 
 /** Fetch and render contacts */
 async function fetchData() {
-  let res = await fetch("https://join-2aee1-default-rtdb.europe-west1.firebasedatabase.app/.json");
+  let res = await fetch("https://editcontactdatenbank-default-rtdb.europe-west1.firebasedatabase.app/.json");
   let data = await res.json();
   allContacts = Object.values(data.person || {});
   renderContacts();
@@ -101,7 +101,6 @@ function editContact(name) {
   let contact = allContacts.find(c => c.name === name);
   clearOverlay();
   openModal("modalBackdrop");
-  // Figma-like Slide-in Overlay von LINKS
   document.getElementById("addContactForm").innerHTML = `
     <div class="edit-contact-overlay-slidein">
       <div class="edit-contact-header">
@@ -114,16 +113,20 @@ function editContact(name) {
           ${getInitials(contact.name)}
         </div>
         <form class="edit-contact-form" id="contactForm" onsubmit="handleContactFormSubmit(event)">
-          <div class="input-wrapper">
-            <input id="inputName" value="${contact.name || ''}" required autocomplete="off" placeholder="Name">
+          <input type="hidden" id="oldContactName" value="${contact.name}">
+          <div class="floating-label-group">
+            <input id="inputName" value="${contact.name || ''}" required autocomplete="off" placeholder=" " />
+            <label for="inputName">Name</label>
             <img class="input-icon" src="assets/person.png" alt="Name">
           </div>
-          <div class="input-wrapper">
-            <input id="inputEmail" type="email" value="${contact.email || ''}" required autocomplete="off" placeholder="E-Mail">
+          <div class="floating-label-group">
+            <input id="inputEmail" type="email" value="${contact.email || ''}" required autocomplete="off" placeholder=" " />
+            <label for="inputEmail">Email</label>
             <img class="input-icon" src="assets/mail.png" alt="E-Mail">
           </div>
-          <div class="input-wrapper">
-            <input id="inputPhone" value="${contact.phone || ''}" required autocomplete="off" placeholder="Phone">
+          <div class="floating-label-group">
+            <input id="inputPhone" value="${contact.phone || ''}" required autocomplete="off" placeholder=" " />
+            <label for="inputPhone">Phone</label>
             <img class="input-icon" src="assets/call.png" alt="Phone">
           </div>
           <div class="edit-contact-buttons">
@@ -137,19 +140,48 @@ function editContact(name) {
 }
 
 /** Handle form submit (add/edit) */
-function handleContactFormSubmit(event) {
+async function handleContactFormSubmit(event) {
   event.preventDefault();
-  // Hier kannst du Save/Update-Logik ergänzen
+  const name = document.getElementById("inputName").value.trim();
+  const email = document.getElementById("inputEmail").value.trim();
+  const phone = document.getElementById("inputPhone").value.trim();
+  const oldNameField = document.getElementById("oldContactName");
+
+  // Simple validation
+  if (!name || !email || !phone) return;
+
+  if (oldNameField) {
+    // === EDIT MODE ===
+    const oldName = oldNameField.value;
+    let res = await fetch("https://editcontactdatenbank-default-rtdb.europe-west1.firebasedatabase.app/person.json");
+    let data = await res.json();
+    let [key] = Object.entries(data || {}).find(([_, val]) => val.name === oldName) || [];
+    if (key) {
+      await fetch(`https://editcontactdatenbank-default-rtdb.europe-west1.firebasedatabase.app/person/${key}.json`, {
+        method: "PUT",
+        body: JSON.stringify({ name, email, phone }),
+        headers: { "Content-Type": "application/json" }
+      });
+    }
+  } else {
+    // === CREATE MODE ===
+    await fetch("https://editcontactdatenbank-default-rtdb.europe-west1.firebasedatabase.app/person.json", {
+      method: "POST",
+      body: JSON.stringify({ name, email, phone }),
+      headers: { "Content-Type": "application/json" }
+    });
+  }
+  await fetchData();
   closeOverlay();
 }
 
 /** Delete contact */
 async function deleteContact(name) {
-  let res = await fetch("https://join-2aee1-default-rtdb.europe-west1.firebasedatabase.app/person.json");
+  let res = await fetch("https://editcontactdatenbank-default-rtdb.europe-west1.firebasedatabase.app/person.json");
   let data = await res.json();
   let [key] = Object.entries(data || {}).find(([_, val]) => val.name === name) || [];
   if (!key) return;
-  await fetch(`https://join-2aee1-default-rtdb.europe-west1.firebasedatabase.app/person/${key}.json`, {
+  await fetch(`https://editcontactdatenbank-default-rtdb.europe-west1.firebasedatabase.app/person/${key}.json`, {
     method: "DELETE"
   });
   closeContactOverlay();
@@ -190,8 +222,6 @@ function toggleShowContactMobile(name) {
   document.getElementById("addContactForm").innerHTML = contactDetailTemplate(contact);
   openModal("modalBackdrop");
 }
-
-/** ===================== Overlay Template: Figma-Style ===================== */
 
 /**
  * Template generator for a contact card in the list.
@@ -243,15 +273,15 @@ function contactDetailTemplate(contact) {
           <div class="show-contact-avatar" style="background:${bg};">
           ${initials}</div>
           <div><h2 style="margin:0;">${contact.name}</h2>
-          <div style="display:flex;margin-top:10px;">
-          <button onclick="editContact('${contact.name}')" class="contact-detail-buttons">
-  <img class="icon-default" src="./assets/edit.png" alt="Edit">
-   <img class="icon-hover" src="./assets/edit-blue-hover.png" alt="Edit">Edit
-</button>
-          <button onclick="deleteContact('${contact.name}')" class="contact-detail-buttons">
-            <img class="icon-default" src="./assets/delete.png" alt="Delete">
-             <img class="icon-hover" src="./assets/delete-blue-hover.png" alt="Delete">Delete
-          </button>
+          <div style="display:flex;margin-top:10px;gap:8px;">
+            <button onclick="editContact('${contact.name}')" class="contact-detail-buttons">
+              <img class="edit-icon" src="./assets/edit.png" alt="Edit">
+              <span class="edit-label">Edit</span>
+            </button>
+            <button onclick="deleteContact('${contact.name}')" class="contact-detail-buttons">
+              <img class="delete-icon" src="./assets/delete.png" alt="Delete">
+              <span class="delete-label">Delete</span>
+            </button>
           </div>
           </div>
         </div>
@@ -263,18 +293,18 @@ function contactDetailTemplate(contact) {
       </div>
        <img class="menu-contact-options" id="menu-contact-options" onclick="toggleContactMenu()" src="./svg/MenuContactOptions.svg" alt="Options">
        <div class="custom-dropdown" id="contactMenu">
-  <button onclick="editContact('${contact.name}')">
-    <img src="./svg/edit-black.svg" alt="Edit"> Edit
-  </button>
-  <button onclick="deleteContact('${contact.name}')">
-    <img src="./svg/delete.svg" alt="Delete"> Delete
-  </button>
-</div>
-`;
+        <button onclick="editContact('${contact.name}')">
+          <img src="./svg/edit-black.svg" alt=""> Edit
+        </button>
+        <button onclick="deleteContact('${contact.name}')">
+          <img src="./svg/delete.svg" alt=""> Delete
+        </button>
+      </div>
+  `;
 }
 
 /**
- * Template for the contact add form with HTML5 validation.
+ * Template for the contact add form with floating labels.
  *
  * @returns {string} - HTML string.
  */
@@ -291,24 +321,23 @@ function contactAddFormTemplate() {
       <div class="add-contact-right">
         <form id="contactForm" onsubmit="handleContactFormSubmit(event)">
           <div class="add-contact-form">
-            <img id="contactImage" src="./svg/addContactPic.svg" class="profile-responsive-middle" alt="Contact Icon">
-            
+            <img id="contactImage" src="./assets/Frame 79.png" class="profile-responsive-middle" alt="Contact Icon">
             <div class="add-contact-form-section">
               <div class="add-contact-inputs">
-                <div class="input-wrapper">
-                  <input id="inputName" type="text" placeholder="Name">
-                  <img src="./svg/person.svg" class="input-icon">
-                  <div class="error-message"></div>
+                <div class="floating-label-group">
+                  <input id="inputName" type="text" required placeholder=" " autocomplete="off" />
+                  <label for="inputName">Name</label>
+                  <img src="./assets/person.png" class="input-icon">
                 </div>
-                <div class="input-wrapper">
-                  <input id="inputEmail" type="text" placeholder="Email">
-                  <img src="./svg/mail.svg" class="input-icon">
-                  <div class="error-message"></div>
+                <div class="floating-label-group">
+                  <input id="inputEmail" type="email" required placeholder=" " autocomplete="off" />
+                  <label for="inputEmail">Email</label>
+                  <img src="./assets/mail.png" class="input-icon">
                 </div>
-                <div class="input-wrapper">
-                  <input id="inputPhone" type="text" placeholder="Phone">
-                  <img src="./svg/call.svg" class="input-icon">
-                  <div class="error-message"></div>
+                <div class="floating-label-group">
+                  <input id="inputPhone" type="text" required placeholder=" " autocomplete="off" />
+                  <label for="inputPhone">Phone</label>
+                  <img src="./assets/call.png" class="input-icon">
                 </div>
               </div>
               <div class="add-contact-buttons">
@@ -330,3 +359,6 @@ function closeOverlayDirectly() {
   clearOverlay();
   closeModal("modalBackdrop");
 }
+
+// Initial load
+window.onload = fetchData;
