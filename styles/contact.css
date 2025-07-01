@@ -264,7 +264,7 @@ h2 {
 }
 
 .create-btn:hover {
-  background-color: #29abe2;
+  background-color: #005DFF;
 }
 
 .contact-name {
@@ -400,6 +400,7 @@ body.modal-open {
   font-size: 24px;
   cursor: pointer;
   z-index: 10;
+  color: white;
 }
 .close-btn:hover {
   background-color: #4589FF;
@@ -693,7 +694,7 @@ body.modal-open {
   gap: 16px;
   margin-top: 12px;
   width: 100%;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 .edit-contact-form .delete-btn,
 .edit-contact-form .save-btn {
@@ -800,6 +801,34 @@ body.modal-open {
   background: none !important;
   border: none !important;
 }
+
+  .input-wrapper .input-icon {
+        display: block;
+        position: absolute;
+        right: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 18px;
+        height: 18px;
+        opacity: 0.5;
+      }
+      .input-icon-down {
+        display: none;
+      }
+      .input-wrapper.select .input-icon-down {
+        display: block;
+        position: absolute;
+        right: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 18px;
+        height: 18px;
+        opacity: 0.7;
+        pointer-events: none;
+      }
+      .input-wrapper.select .input-icon {
+        display: none;
+      }
 
 @media (max-width: 1310px) {
   .contact-list {

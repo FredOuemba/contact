@@ -116,17 +116,17 @@ function editContact(name) {
           <input type="hidden" id="oldContactName" value="${contact.name}">
           <div class="floating-label-group">
             <input id="inputName" value="${contact.name || ''}" required autocomplete="off" placeholder=" " />
-            <label for="inputName">Name</label>
+            <label for="inputName"></label>
             <img class="input-icon" src="assets/person.png" alt="Name">
           </div>
           <div class="floating-label-group">
             <input id="inputEmail" type="email" value="${contact.email || ''}" required autocomplete="off" placeholder=" " />
-            <label for="inputEmail">Email</label>
+            <label for="inputEmail"></label>
             <img class="input-icon" src="assets/mail.png" alt="E-Mail">
           </div>
           <div class="floating-label-group">
             <input id="inputPhone" value="${contact.phone || ''}" required autocomplete="off" placeholder=" " />
-            <label for="inputPhone">Phone</label>
+            <label for="inputPhone"></label>
             <img class="input-icon" src="assets/call.png" alt="Phone">
           </div>
           <div class="edit-contact-buttons">
@@ -354,7 +354,6 @@ function contactAddFormTemplate() {
   `;
 }
 
-/** Utility: Close overlay directly (optional for back arrow) */
 function closeOverlayDirectly() {
   clearOverlay();
   closeModal("modalBackdrop");
